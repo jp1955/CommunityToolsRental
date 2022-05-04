@@ -1,0 +1,20 @@
+        private bool DoTableExists()
+        {
+            var connection = Helper.CreateDatabaseConnection();
+            
+            // look for tables that exist, returns 0 if none, postive number if there are
+            string sql = $"SELECT COUNT(*) FROM " + 
+                         $"{connection.Database}.INFORMATION_SCHEMA_TABLES " + 
+                         $"WHERE TABLE_TYPE = 'BASE TABLE'";
+
+            using (connection)
+            {
+                int num = connection.QuerySingle<int>(sql);
+                if (num > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }

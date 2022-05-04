@@ -1,0 +1,33 @@
+        public void CreateDatabase()
+        {
+            SqlConnection connection = Helper.CreateDatabaseConnection();
+            SqlCommand command = new SqlCommand();
+            try
+            {
+                string connectionString = $"Data Source = {connection.DataSource}; " +
+                                          $"Integrated Security = True";
+
+                // query to build data base if it does not already exist
+                string sql = $"IF NOT EXISTS (SELECT 1 FROM sys.database WHERE " +
+                             $"name = {connection.Database} ) " +
+                             $"CREATE DATABASE {connection.Database}";
+                using (SqlConnection connServer = new SqlConnection(connectionString))
+                {
+                    using (command = new SqlCommand(sql, connServer))
+                    {
+                        if (connServer.State == System.Data.ConnectionState.Closed)
+                        {
+                            connServer.Open();
+                        }
+                        command.ExecuteNonQuery();
+                        connServer.Close();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                throw;
+            }
+        }
