@@ -65,6 +65,8 @@ namespace DataManagement
                                "ToolID int NOT NULL, " +
                                "DateRented DATETIME NOT NULL, " + 
                                "DateReturned DATETIME NULL, " +
+                               "ToolCondition VARCHAR(30) NULL, " +
+                               "Notes VARCHAR(100) NULL " +
                                // no commas between separate sections
                                "FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID), " + 
                                "FOREIGN KEY(ToolID) REFERENCES Tools(ToolID) " ;
@@ -135,10 +137,10 @@ namespace DataManagement
             
             // system.datetime.now gets the current time
             // can only seed primary keys and foreign keys that already exist, and index starts from 1 not 0
-            newLoans.Add(new Loan(1, 1, System.DateTime.Now.AddDays(-2).AddHours(3)));
-            newLoans.Add(new Loan(2, 3, System.DateTime.Now.AddDays(-1).AddHours(5)));
-            newLoans.Add(new Loan(3, 5, System.DateTime.Now.AddDays(-5).AddHours(2)));
-            newLoans.Add(new Loan(4, 4, System.DateTime.Now.AddDays(-11).AddHours(9)));
+            newLoans.Add(new Loan(1, 1, System.DateTime.Now.AddDays(-2).AddHours(3), "New", "None"));
+            newLoans.Add(new Loan(2, 3, System.DateTime.Now.AddDays(-1).AddHours(5), "New", "None"));
+            newLoans.Add(new Loan(3, 5, System.DateTime.Now.AddDays(-5).AddHours(2), "New", "None"));
+            newLoans.Add(new Loan(4, 4, System.DateTime.Now.AddDays(-11).AddHours(9), "New", "None"));
 
             foreach (var loan in newLoans)
             {

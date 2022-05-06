@@ -167,6 +167,7 @@ namespace DataManagement
         public void UpdateToolLoanStatus(int id, int rented)
         {
             string sql = "UPDATE Tools SET " +
+                         "ToolCondition = @ToolCondition " +
                          $"Rented = {rented} " +
                          $"WHERE ToolID = {id}";
 
@@ -217,19 +218,6 @@ namespace DataManagement
             }
         }
 
-        public void SaveToolAfterLoan(Tool updatedTool)
-        {
-            string sql = "UPDATE Tools SET " +
-                "ToolCondition = @ToolCondition, Notes = @Notes " +
-                $"WHERE ToolID = {updatedTool.ToolID}";
-
-            using (var connection = Helper.CreateDatabaseConnection())
-            {
-                connection.Execute(sql, updatedTool);
-            }
-        }
-
-
         /// <summary>
         /// Delete a single tool by ID
         /// </summary>
@@ -260,8 +248,8 @@ namespace DataManagement
         /// <param name="loan"></param>
         public void AddNewLoan(Loan loan)
         {
-            string sql = "INSERT INTO ToolLoans " + "(CustomerID,ToolID,DateRented) " +
-                           "VALUES (@CustomerID,@ToolID,@DateRented)";
+            string sql = "INSERT INTO ToolLoans " + "(CustomerID,ToolID,DateRented,ToolCondition,Notes) " +
+                           "VALUES (@CustomerID,@ToolID,@DateRented,@ToolCondition,@Notes)";
             using (var connection = Helper.CreateDatabaseConnection())
             {
                 connection.Execute(sql, loan);
@@ -331,7 +319,8 @@ namespace DataManagement
         {
             
             string sql = "UPDATE ToolLoans SET " +
-                "DateReturned = @DateReturned " +
+                "DateReturned = @DateReturned, ToolCondition = @ToolCondition, " +
+                "Notes = @Notes " +
                 $"WHERE LoanID = {updatedLoan.LoanID}";
 
             using (var connection = Helper.CreateDatabaseConnection())
