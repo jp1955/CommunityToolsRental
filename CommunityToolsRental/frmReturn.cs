@@ -50,7 +50,7 @@ namespace CommunityToolsRental
 
             Tool updatedTool = new Tool();
             updatedTool.ToolID = loanDetails.ToolID;
-            updatedTool.Active = false;
+            updatedTool.ActiveSendrkrkk = false;
             updatedTool.ToolCondition = txtReturnCondition.Text;
             updatedTool.Notes = txtReturnNotes.Text;
             
