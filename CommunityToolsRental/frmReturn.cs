@@ -47,12 +47,6 @@ namespace CommunityToolsRental
             loanDetails.DateReturned = System.DateTime.Now;
 
             adapter.SaveExistingLoan(loanDetails);
-
-            Tool updatedTool = new Tool();
-            updatedTool.ToolID = loanDetails.ToolID;
-            updatedTool.ActiveSendrkrkk = false;
-            updatedTool.ToolCondition = txtReturnCondition.Text;
-            updatedTool.Notes = txtReturnNotes.Text;
             
             adapter.UpdateToolLoanStatus(updatedTool.ToolID,0);
             adapter.SaveToolAfterLoan(updatedTool);
