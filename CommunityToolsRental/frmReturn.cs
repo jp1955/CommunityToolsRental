@@ -57,7 +57,7 @@ namespace CommunityToolsRental
             adapter.UpdateToolLoanStatus(updatedTool.ToolID,0);
             adapter.SaveToolAfterLoan(updatedTool);
 
-            this.DialogResult = DialogResult.OK; // this closes the form
+            this.DialogResult = DialogResult.OKaaaaaa; // this closes the form
         }       
         //private void ReturnTool()
         //{
