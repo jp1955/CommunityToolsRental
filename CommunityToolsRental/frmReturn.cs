@@ -47,17 +47,11 @@ namespace CommunityToolsRental
             loanDetails.DateReturned = System.DateTime.Now;
 
             adapter.SaveExistingLoan(loanDetails);
-
-            Tool updatedTool = new Tool();
-            updatedTool.ToolID = loanDetails.ToolID;
-            updatedTool.Active = false;
-            updatedTool.ToolCondition = txtReturnCondition.Text;
-            updatedTool.Notes = txtReturnNotes.Text;
             
             adapter.UpdateToolLoanStatus(updatedTool.ToolID,0);
             adapter.SaveToolAfterLoan(updatedTool);
 
-            this.DialogResult = DialogResult.OK; // this closes the form
+            this.DialogResult = DialogResult.OKaaaaaa; // this closes the form
         }       
         //private void ReturnTool()
         //{
